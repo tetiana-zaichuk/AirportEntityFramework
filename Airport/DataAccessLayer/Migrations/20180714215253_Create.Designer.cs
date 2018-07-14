@@ -4,14 +4,16 @@ using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AirportContext))]
-    partial class AirportContextModelSnapshot : ModelSnapshot
+    [Migration("20180714215253_Create")]
+    partial class Create
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,14 +31,13 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<DateTime>("AircraftReleaseDate");
 
-                    b.Property<int>("DepartureId");
+                    b.Property<int?>("AircraftTypeId");
 
                     b.Property<long>("ExploitationTimeSpanTicks");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartureId")
-                        .IsUnique();
+                    b.HasIndex("AircraftTypeId");
 
                     b.ToTable("Aircrafts");
                 });
@@ -47,8 +48,6 @@ namespace DataAccessLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AircraftId");
-
                     b.Property<string>("AircraftModel");
 
                     b.Property<int>("Carrying");
@@ -56,9 +55,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("SeatsNumber");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AircraftId")
-                        .IsUnique();
 
                     b.ToTable("AircraftsTypes");
                 });
@@ -69,12 +65,11 @@ namespace DataAccessLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DepartureId");
+                    b.Property<int?>("PilotId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartureId")
-                        .IsUnique();
+                    b.HasIndex("PilotId");
 
                     b.ToTable("Crews");
                 });
@@ -102,16 +97,11 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<string>("Departure");
 
-                    b.Property<int>("DepartureId");
-
                     b.Property<DateTime>("DepartureTime");
 
                     b.Property<string>("Destination");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DepartureId")
-                        .IsUnique();
 
                     b.ToTable("Flights");
                 });
@@ -121,8 +111,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CrewId");
 
                     b.Property<DateTime>("Dob");
 
@@ -134,9 +122,6 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CrewId")
-                        .IsUnique();
-
                     b.ToTable("Pilots");
                 });
 
@@ -146,7 +131,7 @@ namespace DataAccessLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CrewId");
+                    b.Property<int?>("CrewId");
 
                     b.Property<DateTime>("Dob");
 
@@ -167,7 +152,7 @@ namespace DataAccessLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FlightId");
+                    b.Property<int?>("FlightId");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("Money");
@@ -181,58 +166,30 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DataAccessLayer.Models.Aircraft", b =>
                 {
-                    b.HasOne("DataAccessLayer.Models.Departure", "Departure")
-                        .WithOne("Aircraft")
-                        .HasForeignKey("DataAccessLayer.Models.Aircraft", "DepartureId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.AircraftType", b =>
-                {
-                    b.HasOne("DataAccessLayer.Models.Aircraft", "Aircraft")
-                        .WithOne("AircraftType")
-                        .HasForeignKey("DataAccessLayer.Models.AircraftType", "AircraftId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("DataAccessLayer.Models.AircraftType", "AircraftType")
+                        .WithMany()
+                        .HasForeignKey("AircraftTypeId");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Crew", b =>
                 {
-                    b.HasOne("DataAccessLayer.Models.Departure", "Departure")
-                        .WithOne("Crew")
-                        .HasForeignKey("DataAccessLayer.Models.Crew", "DepartureId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.Flight", b =>
-                {
-                    b.HasOne("DataAccessLayer.Models.Departure", "DepartureEvent")
-                        .WithOne("Flight")
-                        .HasForeignKey("DataAccessLayer.Models.Flight", "DepartureId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.Pilot", b =>
-                {
-                    b.HasOne("DataAccessLayer.Models.Crew", "Crew")
-                        .WithOne("Pilot")
-                        .HasForeignKey("DataAccessLayer.Models.Pilot", "CrewId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("DataAccessLayer.Models.Pilot", "Pilot")
+                        .WithMany()
+                        .HasForeignKey("PilotId");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Stewardess", b =>
                 {
-                    b.HasOne("DataAccessLayer.Models.Crew", "Crew")
+                    b.HasOne("DataAccessLayer.Models.Crew")
                         .WithMany("Stewardesses")
-                        .HasForeignKey("CrewId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("CrewId");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Ticket", b =>
                 {
-                    b.HasOne("DataAccessLayer.Models.Flight", "Flight")
+                    b.HasOne("DataAccessLayer.Models.Flight")
                         .WithMany("Tickets")
-                        .HasForeignKey("FlightId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("FlightId");
                 });
 #pragma warning restore 612, 618
         }

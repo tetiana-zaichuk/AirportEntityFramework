@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccessLayer.Models
 {
@@ -9,7 +10,8 @@ namespace DataAccessLayer.Models
         public DateTime Dob { get; set; }
         public int Experience { get; set; }
         
-        //public int CrewId { get; set; }
-        //public Crew Crew { get; set; }
+        public int CrewId { get; set; }
+        [ForeignKey("CrewId")]
+        public Crew Crew { get; set; }
     }
 }

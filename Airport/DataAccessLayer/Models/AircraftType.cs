@@ -1,4 +1,6 @@
-﻿namespace DataAccessLayer.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DataAccessLayer.Models
 {
     public class AircraftType: Entity
     {
@@ -6,7 +8,8 @@
         public int SeatsNumber { get; set; }
         public int Carrying { get; set; }
         
-        //public int AircraftId { get; set; }
-        //public Aircraft Aircraft { get; set; }
+        public int AircraftId { get; set; }
+        [ForeignKey("AircraftId")]
+        public Aircraft Aircraft { get; set; }
     }
 }

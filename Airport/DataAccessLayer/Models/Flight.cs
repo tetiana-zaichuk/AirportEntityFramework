@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccessLayer.Models
 {
@@ -11,7 +12,8 @@ namespace DataAccessLayer.Models
         public DateTime ArrivalTime { get; set; }
         public List<Ticket> Tickets { get; set; }
 
-        /*public int DepartureId { get; set; }
-        public Departure DepartureEvent { get; set; }*/
+        public int DepartureId { get; set; }
+        [ForeignKey("DepartureId")]
+        public Departure DepartureEvent { get; set; }
     }
 }

@@ -6,7 +6,8 @@ namespace DataAccessLayer.Models
     {
         [Column(TypeName = "Money")]
         public decimal Price { get; set; }
-        //public int FlightId { get; set; }
-        //public Flight Flight { get; set; }
+        public int FlightId { get; set; }
+        [ForeignKey("FlightId")]
+        public Flight Flight { get; set; }
     }
 }
