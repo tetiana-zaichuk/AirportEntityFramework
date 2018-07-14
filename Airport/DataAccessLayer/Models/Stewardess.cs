@@ -7,5 +7,8 @@ namespace DataAccessLayer.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime Dob { get; set; }
+        
+        //public int CrewId { get; set; }
+        //public Crew Crew { get; set; }
     }
 }

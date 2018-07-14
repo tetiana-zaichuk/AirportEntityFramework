@@ -16,12 +16,19 @@ namespace DataAccessLayer
 
         public AirportContext(DbContextOptions<AirportContext> options) : base(options)
         {
+            //Database.EnsureDeleted();
             Database.EnsureCreated(); 
         }
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Airportdb;Trusted_Connection=True;");
-        }*/
+            
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Airportdb;Trusted_Connection=True;");
+            //optionsBuilder.UseSqlServer("", b => b.MigrationsAssembly("PresentationLayer"));
+        }
     }
 }
 

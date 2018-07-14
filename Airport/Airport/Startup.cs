@@ -31,7 +31,7 @@ namespace PresentationLayer
             //services.AddScoped<DataSeends>();
             //services.AddScoped<AirportContext>();
             
-            services.AddScoped<IRepository<Aircraft>, Repository<Aircraft>>();
+            //services.AddScoped<IRepository<Aircraft>, Repository<Aircraft>>();
             services.AddScoped<IRepository<AircraftType>, Repository<AircraftType>>();
             services.AddScoped<IRepository<Crew>, Repository<Crew>>();
             services.AddScoped<IRepository<Departure>, Repository<Departure>>();

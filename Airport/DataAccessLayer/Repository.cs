@@ -34,7 +34,9 @@ namespace DataAccessLayer
 
         public virtual void Update(TEntity entity, string modifiedBy = null)
         {
-            Context.Set<TEntity>().Attach(entity);
+            TEntity oldEntity = Context.Set<TEntity>().Find(entity.Id);
+                Context.Entry(oldEntity).State = EntityState.Detached;
+            //Context.Set<TEntity>().Update(entity);
             Context.Entry(entity).State = EntityState.Modified;
         }
 
@@ -48,7 +50,7 @@ namespace DataAccessLayer
             }
             else
             {
-                query.Clear();
+                Context.Set<TEntity>().RemoveRange(query);
             }
         }
 

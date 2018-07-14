@@ -9,15 +9,11 @@ namespace Shared.DTO
         [Required,StringLength(100)]
         public string AircraftName { get; set; }
         [Required]
-        public int AircraftTypeId { get; set; }
+        public AircraftType AircraftType { get; set; }
         [Required]
         public DateTime AircraftReleaseDate { get; set; }
         [Required]
         public TimeSpan ExploitationTimeSpan { get; set; }
-        /*public long ExploitationTimeSpanTicks
-        {
-            get => ExploitationTimeSpan.Ticks;
-            set => ExploitationTimeSpan = TimeSpan.FromTicks(value);
-        }*/
+        
     }
 }

@@ -36,7 +36,6 @@ namespace PresentationLayer.Controllers
                 return BadRequest("Wrong foreign id");
             if (crew.Id != 0)
                 return BadRequest("You can`t enter the id");
-            crew.Id = Services.GetAll().Count + 1;
             Services.Add(crew);
             return Ok(crew);
         }

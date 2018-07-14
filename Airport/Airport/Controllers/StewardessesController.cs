@@ -34,7 +34,6 @@ namespace PresentationLayer.Controllers
                 return BadRequest("Enter correct entity");
             if (stewardess.Id != 0)
                 return BadRequest("You can`t enter the id");
-            stewardess.Id = Services.GetAll().Count + 1;
             Services.Add(stewardess);
             return Ok(stewardess);
         }

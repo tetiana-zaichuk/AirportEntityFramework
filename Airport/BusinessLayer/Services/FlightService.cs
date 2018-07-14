@@ -2,6 +2,7 @@
 using System.Linq;
 using AutoMapper;
 using BusinessLayer.Interfaces;
+using DataAccessLayer;
 using DataAccessLayer.Interfaces;
 using Shared.DTO;
 
@@ -9,39 +10,49 @@ namespace BusinessLayer.Services
 {
     public class FlightService : IService<Flight>
     {
-        private readonly IRepository<DataAccessLayer.Models.Flight> _repository;
-        private readonly IRepository<DataAccessLayer.Models.Ticket> _repositoryTicket;
+        private readonly UnitOfWork _unitOfWork;
 
-        public FlightService(IRepository<DataAccessLayer.Models.Flight> repository,
-            IRepository<DataAccessLayer.Models.Ticket> repositoryTicket)
-        {
-            _repository = repository;
-            _repositoryTicket = repositoryTicket;
-        }
+        public FlightService(AirportContext context) => _unitOfWork = new UnitOfWork(context);
 
         public bool ValidationForeignId(Flight ob)
         {
-            foreach (var t in ob.TicketsId)
+            foreach (var t in ob.Tickets)
             {
-                if (_repositoryTicket.Get(t).FirstOrDefault() == null) return false;
+                if (_unitOfWork.Set<DataAccessLayer.Models.Ticket>().Get(t.Id).FirstOrDefault() == null) return false;
             }
             return true;
         }
 
-        public Flight IsExist(int id) => Mapper.Map<DataAccessLayer.Models.Flight, Flight>(_repository.Get(id).FirstOrDefault());
+        public Flight IsExist(int id) => Mapper.Map<DataAccessLayer.Models.Flight, Flight>(_unitOfWork.Set<DataAccessLayer.Models.Flight>().Get(id).FirstOrDefault());
 
         public DataAccessLayer.Models.Flight ConvertToModel(Flight flight) => Mapper.Map<Flight, DataAccessLayer.Models.Flight>(flight);
         
-        public List<Flight> GetAll() => Mapper.Map<List<DataAccessLayer.Models.Flight>, List<Flight>>(_repository.Get());
+        public List<Flight> GetAll() => Mapper.Map<List<DataAccessLayer.Models.Flight>, List<Flight>>(_unitOfWork.Set<DataAccessLayer.Models.Flight>().Get());
 
         public Flight GetDetails(int id) => IsExist(id);
 
-        public void Add(Flight flight) => _repository.Create(ConvertToModel(flight));
+        public void Add(Flight flight)
+        {
+            _unitOfWork.Set<DataAccessLayer.Models.Flight>().Create(ConvertToModel(flight));
+            _unitOfWork.SaveChages();
+        }
 
-        public void Update(Flight flight) => _repository.Update(ConvertToModel(flight));
+        public void Update(Flight flight)
+        {
+            _unitOfWork.Set<DataAccessLayer.Models.Flight>().Update(ConvertToModel(flight));
+            _unitOfWork.SaveChages();
+        }
 
-        public void Remove(int id) => _repository.Delete(id);
+        public void Remove(int id)
+        {
+            _unitOfWork.Set<DataAccessLayer.Models.Flight>().Delete(id);
+            _unitOfWork.SaveChages();
+        }
 
-        public void RemoveAll() => _repository.Delete();
+        public void RemoveAll()
+        {
+            _unitOfWork.Set<DataAccessLayer.Models.Flight>().Delete();
+            _unitOfWork.SaveChages();
+        }
     }
 }

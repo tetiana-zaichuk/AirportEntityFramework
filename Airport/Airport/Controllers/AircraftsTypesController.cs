@@ -34,7 +34,6 @@ namespace PresentationLayer.Controllers
                 return BadRequest("Enter correct entity");
             if (aircraftType.Id != 0)
                 return BadRequest("You can`t enter the id");
-            aircraftType.Id = Services.GetAll().Count + 1;
             Services.Add(aircraftType);
             return Ok(aircraftType);
         }

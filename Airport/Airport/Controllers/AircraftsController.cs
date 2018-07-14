@@ -40,7 +40,7 @@ namespace PresentationLayer.Controllers
                 return BadRequest("Wrong foreign id");
             if (aircraft.Id != 0)
                 return BadRequest("You can`t enter the id");
-            aircraft.Id = Services.GetAll().Count + 1;
+            //aircraft.Id = Services.GetAll().Count + 1;
             Services.Add(aircraft);
             return Ok(aircraft);
         }

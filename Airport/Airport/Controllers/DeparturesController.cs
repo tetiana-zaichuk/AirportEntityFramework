@@ -40,7 +40,6 @@ namespace PresentationLayer.Controllers
                 return BadRequest("Wrong foreign id");
             if (departure.Id != 0)
                 return BadRequest("You can`t enter the id");
-            departure.Id = Services.GetAll().Count+1;
             Services.Add(departure);
             return Ok(departure);
         }

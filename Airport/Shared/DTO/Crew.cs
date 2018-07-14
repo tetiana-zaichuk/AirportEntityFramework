@@ -7,8 +7,8 @@ namespace Shared.DTO
     {
         public int Id { get; set; }
         [Required]
-        public int PilotId { get; set; }
+        public Pilot Pilot { get; set; }
         [Required]
-        public List<int> StewardessesId=new List<int>();
+        public List<Stewardess> Stewardesses { get; set; }
     }
 }

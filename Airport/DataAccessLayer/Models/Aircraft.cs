@@ -6,7 +6,7 @@ namespace DataAccessLayer.Models
     public class Aircraft: Entity
     {
         public string AircraftName { get; set; }
-        public int AircraftTypeId { get; set; }
+        public AircraftType AircraftType { get; set; }
         public DateTime AircraftReleaseDate { get; set; }
         [NotMapped]
         public TimeSpan ExploitationTimeSpan { get; set; }
@@ -15,5 +15,8 @@ namespace DataAccessLayer.Models
             get => ExploitationTimeSpan.Ticks;
             set => ExploitationTimeSpan = TimeSpan.FromTicks(value);
         }
+        
+        //public int DepartureId { get; set; }
+        //public Departure Departure { get; set; }
     }
 }

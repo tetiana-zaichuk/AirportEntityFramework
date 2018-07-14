@@ -9,6 +9,9 @@ namespace DataAccessLayer.Models
         public DateTime DepartureTime { get; set; }
         public string Destination { get; set; }
         public DateTime ArrivalTime { get; set; }
-        public List<int> TicketsId = new List<int>();
+        public List<Ticket> Tickets { get; set; }
+
+        /*public int DepartureId { get; set; }
+        public Departure DepartureEvent { get; set; }*/
     }
 }

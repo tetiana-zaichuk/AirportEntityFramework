@@ -17,7 +17,6 @@ namespace DataAccessLayer
         {
             return new Repository<TEntity>(Context);
         }
-        
 
         public int SaveChages()
         {

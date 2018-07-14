@@ -38,7 +38,6 @@ namespace PresentationLayer.Controllers
                 return BadRequest("You can`t enter the id");
             if (DateTime.Compare(flight.DepartureTime, flight.ArrivalTime) >= 0)
                 return BadRequest("Wrong departure/arrival date");
-            flight.Id = Services.GetAll().Count + 1;
             if (!Services.ValidationForeignId(flight))
                 return BadRequest("Wrong foreign id");
             Services.Add(flight);

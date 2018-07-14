@@ -12,5 +12,7 @@ namespace Shared.DTO
         public string LastName { get; set; }
         [Required]
         public DateTime Dob { get; set; }
+        public int CrewId { get; set; }
+        public Crew Crew { get; set; }
     }
 }

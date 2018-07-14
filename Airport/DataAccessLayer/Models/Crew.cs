@@ -2,9 +2,12 @@
 
 namespace DataAccessLayer.Models
 {
-    public class Crew: Entity
+    public class Crew : Entity
     {
-        public int PilotId { get; set; }
-        public List<int> StewardessesId=new List<int>();
+        public Pilot Pilot { get; set; }
+        public List<Stewardess> Stewardesses { get; set; }
+        
+        //public int DepartureId { get; set; }
+        //public Departure Departure { get; set; }
     }
 }

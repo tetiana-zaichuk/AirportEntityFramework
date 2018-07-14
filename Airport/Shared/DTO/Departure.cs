@@ -5,15 +5,14 @@ namespace Shared.DTO
 {
     public class Departure
     {
-        
         public int Id { get; set; }
         [Required]
-        public int FlightId { get; set; }
+        public Flight Flight { get; set; }
         [Required]
         public DateTime DepartureDate { get; set; }
         [Required]
-        public int CrewId { get; set; }
+        public Crew Crew { get; set; }
         [Required]
-        public int AircraftId { get; set; }
+        public Aircraft Aircraft { get; set; }
     }
 }
