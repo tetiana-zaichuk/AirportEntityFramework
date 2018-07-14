@@ -14,5 +14,10 @@ namespace Shared.DTO
         public DateTime AircraftReleaseDate { get; set; }
         [Required]
         public TimeSpan ExploitationTimeSpan { get; set; }
+        /*public long ExploitationTimeSpanTicks
+        {
+            get => ExploitationTimeSpan.Ticks;
+            set => ExploitationTimeSpan = TimeSpan.FromTicks(value);
+        }*/
     }
 }

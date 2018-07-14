@@ -2,7 +2,7 @@
 using System.Linq;
 using AutoMapper;
 using BusinessLayer.Interfaces;
-using DataAccessLayer;
+using DataAccessLayer.Interfaces;
 using Shared.DTO;
 
 namespace BusinessLayer.Services

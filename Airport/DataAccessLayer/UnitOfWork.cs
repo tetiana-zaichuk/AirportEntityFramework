@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
 
 namespace DataAccessLayer
 {
     public class UnitOfWork : IUnitOfWork
     {
-        protected readonly DataSeends Context;
+        protected readonly AirportContext Context;
 
-        public UnitOfWork(DataSeends context)
+        public UnitOfWork(AirportContext context)
         {
             this.Context = context;
         }
@@ -18,6 +16,17 @@ namespace DataAccessLayer
         public IRepository<TEntity> Set<TEntity>() where TEntity : Entity
         {
             return new Repository<TEntity>(Context);
+        }
+        
+
+        public int SaveChages()
+        {
+            return Context.SaveChanges();
+        }
+
+        public Task<int> SaveChangesAsync()
+        {
+            return Context.SaveChangesAsync();
         }
 
     }

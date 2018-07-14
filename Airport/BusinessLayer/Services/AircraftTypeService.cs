@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoMapper;
 using BusinessLayer.Interfaces;
-using DataAccessLayer;
+using DataAccessLayer.Interfaces;
 using Shared.DTO;
 
 namespace BusinessLayer.Services

@@ -1,46 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
+using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
-        protected readonly DataSeends Context;
+        protected readonly AirportContext Context;
 
-        public Repository(DataSeends context)
+        public Repository(AirportContext context)
         {
             Context = context;
         }
 
         public virtual List<TEntity> Get(int? filter = null)
         {
-            List<TEntity> query = Context.Set<TEntity>();
+            IQueryable<TEntity> query = Context.Set<TEntity>();
 
             if (filter != null)
             {
-                query = query.Where(e => e.Id == filter).ToList();
+                query = query.Where(e => e.Id == filter);
             }
 
             return query.ToList();
         }
 
-        public virtual void Create(TEntity entity)
+        public virtual void Create(TEntity entity, string createdBy = null)
         {
             Context.Set<TEntity>().Add(entity);
         }
 
-        public virtual void Update(TEntity entity)
+        public virtual void Update(TEntity entity, string modifiedBy = null)
         {
-            var index = Context.Set<TEntity>().FindIndex(e => e.Id == entity.Id);
-            Context.Set<TEntity>()[index] = entity;
+            Context.Set<TEntity>().Attach(entity);
+            Context.Entry(entity).State = EntityState.Modified;
         }
 
         public virtual void Delete(int? filter = null)
         {
-            List<TEntity> query = Context.Set<TEntity>();
+            List<TEntity> query = Context.Set<TEntity>().ToList();
 
             if (filter != null)
             {
@@ -54,7 +54,12 @@ namespace DataAccessLayer
 
         public virtual void Delete(TEntity entity)
         {
-            Context.Set<TEntity>().Remove(entity);
+            var dbSet = Context.Set<TEntity>();
+            if (Context.Entry(entity).State == EntityState.Detached)
+            {
+                dbSet.Attach(entity);
+            }
+            dbSet.Remove(entity);
         }
     }
 }

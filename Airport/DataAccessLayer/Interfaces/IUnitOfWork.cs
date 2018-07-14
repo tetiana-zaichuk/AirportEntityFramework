@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 using DataAccessLayer.Models;
 
-namespace DataAccessLayer
+namespace DataAccessLayer.Interfaces
 {
     public interface IUnitOfWork
     {
         IRepository<TEntity> Set<TEntity>() where TEntity : Entity;
+
+        int SaveChages();
+
+        Task<int> SaveChangesAsync();
     }
 }

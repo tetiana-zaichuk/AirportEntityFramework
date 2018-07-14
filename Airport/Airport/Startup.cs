@@ -2,9 +2,11 @@
 using BusinessLayer.Interfaces;
 using BusinessLayer.Services;
 using DataAccessLayer;
+using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,8 +24,13 @@ namespace PresentationLayer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<AirportContext>(options=>options.UseSqlServer(connection));
+
             services.AddMvc();
-            services.AddScoped<DataSeends>();
+            //services.AddScoped<DataSeends>();
+            //services.AddScoped<AirportContext>();
+            
             services.AddScoped<IRepository<Aircraft>, Repository<Aircraft>>();
             services.AddScoped<IRepository<AircraftType>, Repository<AircraftType>>();
             services.AddScoped<IRepository<Crew>, Repository<Crew>>();
@@ -53,7 +60,7 @@ namespace PresentationLayer
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, AirportContext context)
         {
             if (env.IsDevelopment())
             {
@@ -61,6 +68,8 @@ namespace PresentationLayer
             }
 
             app.UseMvc();
+
+            DbInitializer.Initialize(context);
         }
     }
 }
