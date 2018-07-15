@@ -16,7 +16,7 @@ namespace DataAccessLayer.Models
             set => ExploitationTimeSpan = TimeSpan.FromTicks(value);
         }
         
-        public int DepartureId { get; set; }
+        public int? DepartureId { get; set; }
         [ForeignKey("DepartureId")]
         public Departure Departure { get; set; }
     }
