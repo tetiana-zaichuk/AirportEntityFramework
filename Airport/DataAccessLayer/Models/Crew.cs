@@ -8,7 +8,7 @@ namespace DataAccessLayer.Models
         public Pilot Pilot { get; set; }
         public List<Stewardess> Stewardesses { get; set; }
         
-        public int DepartureId { get; set; }
+        public int? DepartureId { get; set; }
         [ForeignKey("DepartureId")]
         public Departure Departure { get; set; }
     }

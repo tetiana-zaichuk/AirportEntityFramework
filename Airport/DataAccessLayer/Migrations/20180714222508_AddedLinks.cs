@@ -36,34 +36,34 @@ namespace DataAccessLayer.Migrations
             migrationBuilder.AlterColumn<int>(
                 name: "CrewId",
                 table: "Stewardesses",
-                nullable: false,
+                nullable: true,
                 oldClrType: typeof(int),
                 oldNullable: true);
 
             migrationBuilder.AddColumn<int>(
                 name: "CrewId",
                 table: "Pilots",
-                nullable: false,
+                nullable: true,
                 defaultValue: 0);
 
             migrationBuilder.AddColumn<int>(
                 name: "DepartureId",
                 table: "Flights",
-                nullable: false,
+                nullable: true,
                 defaultValue: 0);
 
             migrationBuilder.AddColumn<int>(
                 name: "DepartureId",
                 table: "Crews",
-                nullable: false,
+                nullable: true,
                 defaultValue: 0);
 
             migrationBuilder.AddColumn<int>(
                 name: "DepartureId",
                 table: "Aircrafts",
-                nullable: false,
+                nullable: true,
                 defaultValue: 0);
-
+            /*
             migrationBuilder.CreateIndex(
                 name: "IX_Pilots_CrewId",
                 table: "Pilots",
@@ -86,7 +86,7 @@ namespace DataAccessLayer.Migrations
                 name: "IX_Aircrafts_DepartureId",
                 table: "Aircrafts",
                 column: "DepartureId",
-                unique: true);
+                unique: true);*/
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Aircrafts_Departures_DepartureId",
@@ -94,7 +94,7 @@ namespace DataAccessLayer.Migrations
                 column: "DepartureId",
                 principalTable: "Departures",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.SetNull);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Crews_Departures_DepartureId",
@@ -166,7 +166,7 @@ namespace DataAccessLayer.Migrations
             migrationBuilder.DropIndex(
                 name: "IX_Pilots_CrewId",
                 table: "Pilots");
-
+            /*
             migrationBuilder.DropIndex(
                 name: "IX_Flights_DepartureId",
                 table: "Flights");
@@ -177,7 +177,7 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropIndex(
                 name: "IX_Aircrafts_DepartureId",
-                table: "Aircrafts");
+                table: "Aircrafts");*/
 
             migrationBuilder.DropColumn(
                 name: "CrewId",
