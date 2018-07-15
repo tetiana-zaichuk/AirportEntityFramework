@@ -11,9 +11,7 @@ namespace BusinessLayer.Services
     public class AircraftTypeService : IService<AircraftType>
     {
         private readonly UnitOfWork _unitOfWork;
-
-        //private readonly IRepository<DataAccessLayer.Models.AircraftType> _repository;
-
+        
         public AircraftTypeService(AirportContext context)
             => _unitOfWork = new UnitOfWork(context);
 

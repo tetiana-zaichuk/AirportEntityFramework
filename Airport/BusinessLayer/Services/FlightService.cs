@@ -23,35 +23,35 @@ namespace BusinessLayer.Services
             return true;
         }
 
-        public Flight IsExist(int id) => Mapper.Map<DataAccessLayer.Models.Flight, Flight>(_unitOfWork.Set<DataAccessLayer.Models.Flight>().Get(id).FirstOrDefault());
+        public Flight IsExist(int id) => Mapper.Map<DataAccessLayer.Models.Flight, Flight>(_unitOfWork.FlightRepository.Get(id).FirstOrDefault());
 
         public DataAccessLayer.Models.Flight ConvertToModel(Flight flight) => Mapper.Map<Flight, DataAccessLayer.Models.Flight>(flight);
         
-        public List<Flight> GetAll() => Mapper.Map<List<DataAccessLayer.Models.Flight>, List<Flight>>(_unitOfWork.Set<DataAccessLayer.Models.Flight>().Get());
+        public List<Flight> GetAll() => Mapper.Map<List<DataAccessLayer.Models.Flight>, List<Flight>>(_unitOfWork.FlightRepository.Get());
 
         public Flight GetDetails(int id) => IsExist(id);
 
         public void Add(Flight flight)
         {
-            _unitOfWork.Set<DataAccessLayer.Models.Flight>().Create(ConvertToModel(flight));
+            _unitOfWork.FlightRepository.Create(ConvertToModel(flight));
             _unitOfWork.SaveChages();
         }
 
         public void Update(Flight flight)
         {
-            _unitOfWork.Set<DataAccessLayer.Models.Flight>().Update(ConvertToModel(flight));
+            _unitOfWork.FlightRepository.Update(ConvertToModel(flight));
             _unitOfWork.SaveChages();
         }
 
         public void Remove(int id)
         {
-            _unitOfWork.Set<DataAccessLayer.Models.Flight>().Delete(id);
+            _unitOfWork.FlightRepository.Delete(id);
             _unitOfWork.SaveChages();
         }
 
         public void RemoveAll()
         {
-            _unitOfWork.Set<DataAccessLayer.Models.Flight>().Delete();
+            _unitOfWork.FlightRepository.Delete();
             _unitOfWork.SaveChages();
         }
     }
