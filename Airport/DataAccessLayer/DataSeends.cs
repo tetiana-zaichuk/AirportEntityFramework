@@ -60,16 +60,16 @@ namespace DataAccessLayer
 
         public static List<Crew> Crews = new List<Crew>()
         {
-            new Crew(){ Pilot = new Pilot(){ FirstName = "Adam", LastName = "Black", Dob = new DateTime(1978,03,03), Experience = 9}, Stewardesses = {}},
-            new Crew(){ Pilot = new Pilot(){ FirstName = "John", LastName = "Smith", Dob = new DateTime(1983,07,11), Experience = 5}, Stewardesses = {}},
-            new Crew(){ Pilot = new Pilot(){ FirstName = "Jane", LastName = "Smith", Dob = new DateTime(1980,07,11), Experience = 7}, Stewardesses = {}}
+            new Crew(){ /*DepartureId = 5,*/ Pilot = new Pilot(){ FirstName = "Adam", LastName = "Black", Dob = new DateTime(1978,03,03), Experience = 9}, Stewardesses = new List<Stewardess>{new Stewardess(){CrewId = 1, FirstName = "Anna", LastName = "Black", Dob = new DateTime(1993,02,03)}}},
+            new Crew(){ /*DepartureId = 6,*/ Pilot = new Pilot(){ FirstName = "John", LastName = "Smith", Dob = new DateTime(1983,07,11), Experience = 5}, Stewardesses = new List<Stewardess>{new Stewardess(){CrewId = 2, FirstName = "Anna", LastName = "Red", Dob = new DateTime(1991,01,07)}}},
+            new Crew(){ /*DepartureId = 7,*/ Pilot = new Pilot(){ FirstName = "Jane", LastName = "Smith", Dob = new DateTime(1980,07,11), Experience = 7}, Stewardesses = new List<Stewardess>{new Stewardess(){CrewId = 3, FirstName = "Eva", LastName = "Green", Dob = new DateTime(1987,11,10)}}}
         };
 
         public static List<Departure> Departures = new List<Departure>()
         {
-            new Departure(){  DepartureDate = new DateTime(2018,7,15,19,35,00)},
-            new Departure(){  DepartureDate = new DateTime(2018,7,17,14,25,00)},
-            new Departure(){  DepartureDate = new DateTime(2018,7,20,19,35,00)}
+            new Departure(){ Flight = Flights[0], Aircraft = Aircraft[0], Crew = Crews[0], DepartureDate = new DateTime(2018,7,15,19,35,00)},
+            new Departure(){ Flight = Flights[1], Aircraft = Aircraft[1], Crew = Crews[1], DepartureDate = new DateTime(2018,7,17,14,25,00)},
+            new Departure(){ Flight = Flights[2], Aircraft = Aircraft[2], Crew = Crews[2], DepartureDate = new DateTime(2018,7,20,19,35,00)}
         };
 
         public static List<TEntity> Set<TEntity>()

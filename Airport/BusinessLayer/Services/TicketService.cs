@@ -11,8 +11,6 @@ namespace BusinessLayer.Services
     public class TicketService : IService<Ticket>
     {
         private readonly UnitOfWork _unitOfWork;
-        /*private readonly IRepository<DataAccessLayer.Models.Ticket> _repository;
-        private readonly IRepository<DataAccessLayer.Models.Flight> _repositoryFlight;*/
 
         public TicketService(AirportContext context)
         {
