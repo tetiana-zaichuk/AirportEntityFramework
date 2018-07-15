@@ -56,6 +56,10 @@ namespace PresentationLayer
                 cfg.CreateMap<Shared.DTO.AircraftType, AircraftType>();
                 cfg.CreateMap<Flight, Shared.DTO.Flight>();
                 cfg.CreateMap<Shared.DTO.Flight, Flight>();
+                cfg.CreateMap<Pilot, Shared.DTO.Pilot>();
+                cfg.CreateMap<Shared.DTO.Pilot, Pilot>().ForMember(p=>p.Crew, opt=>opt.Ignore());
+                cfg.CreateMap<Shared.DTO.Crew, Crew>();
+
             });
         }
 

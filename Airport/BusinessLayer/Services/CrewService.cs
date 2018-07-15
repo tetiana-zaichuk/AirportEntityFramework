@@ -21,13 +21,15 @@ namespace BusinessLayer.Services
         }
 
         public bool ValidationForeignId(Crew ob)
-        {
+        {/*
             if (ob.Stewardesses == null) return false;
             foreach (var st in ob.Stewardesses)
             {
                 if (_unitOfWork.Set<DataAccessLayer.Models.Stewardess>().Get(st.Id).FirstOrDefault() == null) return false;
             }
             return _unitOfWork.Set<DataAccessLayer.Models.Pilot>().Get().FirstOrDefault(o => o.Id == ob.Pilot.Id) != null;
+                    */
+            return true;
         }
 
         public Crew IsExist(int id) => Mapper.Map<DataAccessLayer.Models.Crew, Crew>(_unitOfWork.Set<DataAccessLayer.Models.Crew>().Get(id).FirstOrDefault());
