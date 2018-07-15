@@ -24,12 +24,13 @@ namespace BusinessLayer.Services
 
         public bool ValidationForeignId(Departure ob)
         {
-            return _unitOfWork.Set<DataAccessLayer.Models.Aircraft>().Get()
+           /* return _unitOfWork.Set<DataAccessLayer.Models.Aircraft>().Get()
                        .FirstOrDefault(o => o.Id == ob.Aircraft.Id) != null &&
                    _unitOfWork.Set<DataAccessLayer.Models.Crew>().Get().FirstOrDefault(o => o.Id == ob.Crew.Id) !=
                    null &&
                    _unitOfWork.Set<DataAccessLayer.Models.Flight>().Get().FirstOrDefault(o => o.Id == ob.Flight.Id) !=
-                   null;
+                   null;*/
+            return true;
         }
 
         public Departure IsExist(int id)

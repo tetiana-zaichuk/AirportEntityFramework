@@ -15,7 +15,7 @@ namespace BusinessLayer.Services
         public AircraftService( AirportContext context) =>_unitOfWork=new UnitOfWork(context);
 
         public bool ValidationForeignId(Aircraft ob)
-            => _unitOfWork.Set<DataAccessLayer.Models.AircraftType>().Get().FirstOrDefault(o=>o.Id==ob.AircraftType.Id)!=null;
+            => true;//_unitOfWork.Set<DataAccessLayer.Models.AircraftType>().Get().FirstOrDefault(o=>o.Id==ob.AircraftType.Id)!=null;
 
         public Aircraft IsExist(int id)
             => Mapper.Map<DataAccessLayer.Models.Aircraft, Aircraft>(_unitOfWork.Set<DataAccessLayer.Models.Aircraft>().Get(id).FirstOrDefault());
