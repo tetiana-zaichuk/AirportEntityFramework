@@ -16,11 +16,11 @@ namespace DataAccessLayer
 
         public static List<Aircraft> Aircraft = new List<Aircraft>()
         {
-                new Aircraft(){ DepartureId = 1, AircraftName = "Strong", AircraftType = new AircraftType(){  AircraftModel = "Tupolev Tu-134", SeatsNumber = 80, Carrying = 47000}, AircraftReleaseDate = new DateTime(2011, 6, 10),
+                new Aircraft(){ AircraftName = "Strong", AircraftType = new AircraftType(){  AircraftModel = "Tupolev Tu-134", SeatsNumber = 80, Carrying = 47000}, AircraftReleaseDate = new DateTime(2011, 6, 10),
                     ExploitationTimeSpan = new DateTime(2021, 6, 10)-new DateTime(2011, 6, 10)},
-                new Aircraft(){ DepartureId = 2, AircraftName = "Dog", AircraftType = new AircraftType(){  AircraftModel = "Tupolev Tu-204", SeatsNumber = 196, Carrying = 107900}, AircraftReleaseDate = new DateTime(2007, 6, 10),
+                new Aircraft(){ AircraftName = "Dog", AircraftType = new AircraftType(){  AircraftModel = "Tupolev Tu-204", SeatsNumber = 196, Carrying = 107900}, AircraftReleaseDate = new DateTime(2007, 6, 10),
                     ExploitationTimeSpan = new DateTime(2020, 6, 10)-new DateTime(2011, 6, 10)},
-                new Aircraft(){ DepartureId = 3, AircraftName = "Sky", AircraftType = new AircraftType(){  AircraftModel = "Ilyushin IL-62", SeatsNumber = 138, Carrying = 280300}, AircraftReleaseDate = new DateTime(2015, 6, 10),
+                new Aircraft(){ AircraftName = "Sky", AircraftType = new AircraftType(){  AircraftModel = "Ilyushin IL-62", SeatsNumber = 138, Carrying = 280300}, AircraftReleaseDate = new DateTime(2015, 6, 10),
                     ExploitationTimeSpan = new DateTime(2027, 6, 10)-new DateTime(2011, 6, 10)}
         };
 
@@ -60,9 +60,9 @@ namespace DataAccessLayer
 
         public static List<Crew> Crews = new List<Crew>()
         {
-            new Crew(){ DepartureId = 1, Pilot = new Pilot(){ FirstName = "Adam", LastName = "Black", Dob = new DateTime(1978,03,03), Experience = 9}, Stewardesses = new List<Stewardess>{new Stewardess(){CrewId = 1, FirstName = "Anna", LastName = "Black", Dob = new DateTime(1993,02,03)}}},
-            new Crew(){ DepartureId = 2, Pilot = new Pilot(){ FirstName = "John", LastName = "Smith", Dob = new DateTime(1983,07,11), Experience = 5}, Stewardesses = new List<Stewardess>{new Stewardess(){CrewId = 2, FirstName = "Anna", LastName = "Red", Dob = new DateTime(1991,01,07)}}},
-            new Crew(){ DepartureId = 3, Pilot = new Pilot(){ FirstName = "Jane", LastName = "Smith", Dob = new DateTime(1980,07,11), Experience = 7}, Stewardesses = new List<Stewardess>{new Stewardess(){CrewId = 3, FirstName = "Eva", LastName = "Green", Dob = new DateTime(1987,11,10)}}}
+            new Crew(){ Pilot = new Pilot(){ FirstName = "Adam", LastName = "Black", Dob = new DateTime(1978,03,03), Experience = 9}, Stewardesses = new List<Stewardess>{new Stewardess(){CrewId = 1, FirstName = "Anna", LastName = "Black", Dob = new DateTime(1993,02,03)}}},
+            new Crew(){ Pilot = new Pilot(){ FirstName = "John", LastName = "Smith", Dob = new DateTime(1983,07,11), Experience = 5}, Stewardesses = new List<Stewardess>{new Stewardess(){CrewId = 2, FirstName = "Anna", LastName = "Red", Dob = new DateTime(1991,01,07)}}},
+            new Crew(){ Pilot = new Pilot(){ FirstName = "Jane", LastName = "Smith", Dob = new DateTime(1980,07,11), Experience = 7}, Stewardesses = new List<Stewardess>{new Stewardess(){CrewId = 3, FirstName = "Eva", LastName = "Green", Dob = new DateTime(1987,11,10)}}}
         };
 
         public static List<Departure> Departures = new List<Departure>()
